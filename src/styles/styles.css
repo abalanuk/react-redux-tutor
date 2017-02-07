@@ -3,10 +3,7 @@
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
-  text-align: center;
   color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -20,7 +17,18 @@ a.active {
 }
 
 nav {
-  padding-top: 20px;
+  padding: 20px 0 20px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.main {
+  background-color: antiquewhite;
 }
 
 td {
