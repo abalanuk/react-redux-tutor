@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 // import { Link, IndexLink } from 'react-router';
 import Header from './common/Header';
+import Home from './home/HomePage';
+
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -20,5 +22,9 @@ class App extends React.Component {
 App.propTypes = {
   children: PropTypes.object.isRequired
 };
+
+App.defaultProps = {
+	children: Home
+}
 
 export default App;
