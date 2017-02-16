@@ -4,21 +4,21 @@ import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			course: {title: ""}
 		};
-		this.onClickSave = this.onClickSave.bind(this);
-		this.onTitleChange = this.onTitleChange.bind(this);
+		this.onClickSave = this.onClickSave.bind(this)
+		this.onTitleChange = this.onTitleChange.bind(this)
 	}
 	onTitleChange(event) {
-		const course = this.state.course;
-		course.title = event.target.value;
-		this.setState({course: course});
+		const course = this.state.course
+		course.title = event.target.value
+		this.setState({course: course})
 	}
 	onClickSave() {
-		// alert(`Saving ${this.state.course.title}`);
-		this.props.dispatch(courseActions.createCourse(this.state.course));
+		// alert(`Saving ${this.state.course.title}`)
+		this.props.createCourse(this.state.course)
 	}
 
 	courseRow(course, index){
@@ -26,7 +26,7 @@ class CoursesPage extends React.Component {
 	}
 
 	render() {
-		debugger;
+		debugger
 		return (
 	      <div className="coursesList">
 	        <h2>Courses</h2>
@@ -51,18 +51,26 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes = {
-	dispatch: PropTypes.func.isRequired,
-	courses: PropTypes.array.isRequired
+	courses: PropTypes.array.isRequired,
+	createCourse: PropTypes.func.isRequired
 }
 
+//state -> represents state inside our store
 function mapStateToProps(state, ownProps){
-	debugger;
+	debugger
 	return {
-		courses: state.courses
-	};
+		//key courses -> will be call inside our component: this.props.courses
+		courses: state.courses //state.courses it's what we define as key inside rootReducer
+	}
 }
 
-export default connect(mapStateToProps)(CoursesPage);
+function mapDispatchToProps(dispatch) {
+	return {
+		createCourse: course => dispatch(courseActions.createCourse(course))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
 
 
 
