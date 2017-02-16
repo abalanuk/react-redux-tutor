@@ -9,20 +9,24 @@ class CoursesPage extends React.Component {
 		this.state = {
 			course: {title: ""}
 		};
+
+		//bind section
 		this.onClickSave = this.onClickSave.bind(this)
 		this.onTitleChange = this.onTitleChange.bind(this)
 	}
+
 	onTitleChange(event) {
 		const course = this.state.course
 		course.title = event.target.value
 		this.setState({course: course})
 	}
+
 	onClickSave() {
 		// alert(`Saving ${this.state.course.title}`)
 		this.props.actions.createCourse(this.state.course)
 	}
 
-	courseRow(course, index){
+	_courseRow(course, index) {
 		return <div key={index}>{course.title}</div>
 	}
 
@@ -31,7 +35,7 @@ class CoursesPage extends React.Component {
 		return (
 	      <div className="coursesList">
 	        <h2>Courses</h2>
-	        {this.props.courses.map(this.courseRow)}
+	        {this.props.courses.map(this._courseRow)}
 	        <h3>Add Course</h3>
 	        <div className="form-group">
 		        <input
@@ -51,10 +55,17 @@ class CoursesPage extends React.Component {
 	}
 }
 
+
+CoursesPage.defaultProps = {
+	actions: () => {},
+	courses: [{title: 'Front-End'}]
+}
+
 CoursesPage.propTypes = {
 	actions: PropTypes.object.isRequired,
 	courses: PropTypes.array.isRequired
 }
+
 
 //state -> represents state inside our store
 function mapStateToProps(state, ownProps){
