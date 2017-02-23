@@ -58,38 +58,32 @@ ManageCoursesPage.PropTypes = {
 //  router: PropTypes.object
 //}
 
-//const getCourseById = (courses, courseId) => {
-//  return courses.find((course) => { return course.id === courseId })
-//}
+const getCourseById = (courses, courseId) => {
+  return courses.find((course) => { return course.id === courseId })
+}
+
 function mapStateToProps(state, ownProps) {
 
-  //console.log('ownProps: ', ownProps)
+  console.log('ownProps: ', ownProps)
 
   let course = {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
-  let authors = [
-    {
-      id: 'cory-house',
-      firstName: 'Cory',
-      lastName: 'House'
-    }
-  ]
 
-  //const courseId = ownProps.params.id //from the path `/course/:id`
-  //
-  //if (courseId) {
-  //  course = getCourseById(state.courses, courseId)
-  //  course = course ? course : {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
-  //}
+  const courseId = ownProps.params.id //from the path `/course/:id`
+
+  if (courseId) {
+    course = getCourseById(state.courses, courseId)
+    course = course ? course : {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
+  }
 
   //have to get authors from state
-  const formattedAuthorsForDropDown = authors.map((author) => {
+  const formattedAuthorsForDropDown = state.authors.map((author) => {
     let label = `${author.firstName} ${author.lastName}`
     return {
       value: author.id,
       label
     }
   })
-  debugger;
+
   return {
     authors: formattedAuthorsForDropDown,
     course: course

@@ -18,6 +18,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const store = configureStore()
 
+debugger;
+
 store.dispatch(loadCourses())
 store.dispatch(loadAuthors())
 
