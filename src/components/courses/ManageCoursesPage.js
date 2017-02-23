@@ -54,9 +54,9 @@ ManageCoursesPage.PropTypes = {
   actions: PropTypes.object.isRequired
 }
 
-//ManageCoursesPage.contextTypes = {
-//  router: PropTypes.object
-//}
+ManageCoursesPage.contextTypes = {
+  router: PropTypes.object
+}
 
 const getCourseById = (courses, courseId) => {
   return courses.find((course) => { return course.id === courseId })
