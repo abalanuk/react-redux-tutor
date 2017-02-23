@@ -11,12 +11,18 @@ class ManageCoursesPage extends React.Component {
 
     this.state = {
       errors: {},
-      course: Object.assign({}, this.props.course) //this is a bug while we are refreshing page, because props not yet received and empty in fact
+      course: Object.assign({}, this.props.course)
     }
 
     //bind section
     this.handleCourseChange = this.handleCourseChange.bind(this)
     this.handleCourseSave = this.handleCourseSave.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.course.id !== this.props.course.id) {
+      this.setState({course: Object.assign({}, nextProps.course)})
+    }
   }
 
   handleCourseSave(event) {
