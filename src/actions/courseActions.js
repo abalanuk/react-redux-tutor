@@ -1,13 +1,26 @@
 import * as types from './actionTypes'
 import courseApi from '../api/mockCourseApi'
 
-// export function createCourse(course) {
-// 	debugger
-// 	return {type: types.CREATE_COURSE, course}
-// }
+//export function updateCourseSucess(course) {
+//	return {type: types.UPDATE_COURSE_SUCCESS, course}
+//}
+//
+//export function createCourseSuccess(course) {
+//	return {type: types.CREATE_COURSE_SUCCESS, course}
+//}
+
+//export function saveCourse(course) {
+//  return function(dispatch){
+//    return courseApi.saveCourse(course).then(savedCourse => {
+//      course.id ? dispatch(updateCourseSucess(savedCourse)) : dispatch(createCourseSuccess(savedCourse))
+//    }).catch(error => {
+//      throw(error)
+//    })
+//  }
+//}
 
 export function loadCoursesSuccess(courses) {
-	return {type: types.LOAD_COURSES_SUCCESS, courses}
+  return {type: types.LOAD_COURSES_SUCCESS, courses}
 }
 
 export function loadCourses() {
