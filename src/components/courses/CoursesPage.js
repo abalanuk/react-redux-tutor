@@ -5,10 +5,14 @@ import { browserHistory } from 'react-router'
 import * as courseActions from '../../actions/courseActions'
 import CoursesList from './CoursesList'
 
-
 class CoursesPage extends React.Component {
   constructor(props) {
     super(props)
+
+    //part of state perhaps should be removed
+    this.state = {
+      hasDataLoadingError: false,
+    }
 
     this.redirectToCreateForm = this.redirectToCreateForm.bind(this)
   }
@@ -17,8 +21,11 @@ class CoursesPage extends React.Component {
   redirectToCreateForm() {
     browserHistory.push('/create-course')
   }
+
   render() {
-    const {courses} = this.props
+    const {courses, isLoading} = this.props
+    debugger
+
     return (
       <div className="coursesList">
         <h2>Courses</h2>
@@ -30,7 +37,7 @@ class CoursesPage extends React.Component {
           value='Add Course'
           onClick={this.redirectToCreateForm}
         />
-        <CoursesList courses={courses}/>
+        <CoursesList courses={courses} isLoading={isLoading}/>
       </div>
     );
   }
@@ -41,15 +48,18 @@ CoursesPage.defaultProps = {
 }
 
 CoursesPage.propTypes = {
-  courses: PropTypes.array.isRequired
+  courses: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool
 }
 
 
 //state -> represents state inside our store
 function mapStateToProps(state, ownProps){
+  debugger
   return {
     //key courses -> will be call inside our component: this.props.courses
-    courses: state.courses //state.courses it's what we define as key inside rootReducer
+    courses: state.courses, //state.courses it's what we define as key inside rootReducer
+    isLoading: !!state.ajaxStatus
   }
 }
 

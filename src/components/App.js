@@ -1,8 +1,6 @@
-import React, { PropTypes } from 'react';
-// import { Link, IndexLink } from 'react-router';
-import Header from './common/Header';
-import Home from './home/HomePage';
-
+import React, { PropTypes } from 'react'
+import Header from './common/Header'
+import Home from './home/HomePage'
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -11,7 +9,7 @@ import Home from './home/HomePage';
 class App extends React.Component {
   render() {
     return (
-      <div class="container-fluid">
+      <div className="container-fluid">
         <Header/>
         {this.props.children}
       </div>
@@ -20,11 +18,11 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.object.isRequired
-};
-
-App.defaultProps = {
-	children: Home
+  children: PropTypes.object.isRequired,
 }
 
-export default App;
+App.defaultProps = {
+  children: Home
+}
+
+export default App

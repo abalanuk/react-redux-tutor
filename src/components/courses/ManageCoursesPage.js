@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import toastr from 'toastr'
 //import { browserHistory } from 'react-router'
 import * as courseActions from '../../actions/courseActions'
 import CourseForm from './CourseForm'
@@ -11,6 +12,7 @@ class ManageCoursesPage extends React.Component {
 
     this.state = {
       errors: {},
+      saving: false,
       course: Object.assign({}, this.props.course)
     }
 
@@ -25,11 +27,26 @@ class ManageCoursesPage extends React.Component {
     }
   }
 
-  handleCourseSave(event) {
-    event.preventDefault()
-    this.props.actions.saveCourse(this.state.course)
+  redirectToList() {
+    this.setState({saving: false})
+    toastr.success('Course was saved')
     this.context.router.push('/courses')
     //browserHistory.push('/courses')
+  }
+
+  handleCourseSave(event) {
+    event.preventDefault()
+    this.setState({saving: true})
+    //this call returns promise in fact, see mockCourseApi so we can use .then for resolved promise and call redirect...
+    this.props.actions.saveCourse(this.state.course)
+      //if success the we should redirect to list for showing the result
+      .then(() => {this.redirectToList()})
+      .catch(error => {
+        //if some error then we will notify user with appropriate error via "toastr" notifications utility
+        toastr.error(error)
+        //saving --> false for changing value of Save button
+        this.setState({saving: false})
+      })
   }
 
   handleCourseChange(event) {
@@ -47,7 +64,7 @@ class ManageCoursesPage extends React.Component {
         allAuthors={authors}
         onSave={this.handleCourseSave}
         onChange={this.handleCourseChange}
-        loading={false}
+        saving={this.state.saving}
         errors={this.state.errors}
       />
     )
@@ -69,17 +86,11 @@ const getCourseById = (courses, courseId) => {
 }
 
 function mapStateToProps(state, ownProps) {
+  let defaultCourse = {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
+  //from the path `/course/:id`
+  const courseId = ownProps.params.id
 
-  console.log('ownProps: ', ownProps)
-
-  let course = {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
-
-  const courseId = ownProps.params.id //from the path `/course/:id`
-
-  if (courseId) {
-    course = getCourseById(state.courses, courseId)
-    course = course ? course : {id: "", title: "", watchHref: "", authorId: "", length: "", category: ""}
-  }
+  let course = courseId ? getCourseById(state.courses, courseId) : defaultCourse
 
   //have to get authors from state
   const formattedAuthorsForDropDown = state.authors.map((author) => {
@@ -92,10 +103,10 @@ function mapStateToProps(state, ownProps) {
 
   return {
     authors: formattedAuthorsForDropDown,
-    course: course
+    course: course,
+    isLoading: !!state.ajaxStatus
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {

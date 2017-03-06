@@ -1,34 +1,41 @@
 import * as types from './actionTypes'
 import courseApi from '../api/mockCourseApi'
+import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions'
 
-export function updateCourseSucess(course) {
-	return {type: types.UPDATE_COURSE_SUCCESS, course}
+export function updateCourseSuccess(course) {
+  return {type: types.UPDATE_COURSE_SUCCESS, course}
 }
 
 export function createCourseSuccess(course) {
-	return {type: types.CREATE_COURSE_SUCCESS, course}
+  return {type: types.CREATE_COURSE_SUCCESS, course}
 }
 
 export function saveCourse(course) {
-  return function(dispatch){
+  return function(dispatch) {
+    dispatch(beginAjaxCall())
     return courseApi.saveCourse(course).then(savedCourse => {
-      course.id ? dispatch(updateCourseSucess(savedCourse)) : dispatch(createCourseSuccess(savedCourse))
+      course.id ? dispatch(updateCourseSuccess(savedCourse)) : dispatch(createCourseSuccess(savedCourse))
     }).catch(error => {
+      //emitting this action for reducing by 1 ajaxCallsInProgress slice of state via ajaxStatusReducer
+      dispatch(ajaxCallError(error))
       throw(error)
     })
   }
 }
 
+//load section
 export function loadCoursesSuccess(courses) {
   return {type: types.LOAD_COURSES_SUCCESS, courses}
 }
 
 export function loadCourses() {
-	return function(dispatch){
-		return courseApi.getAllCourses().then(courses => {
-			dispatch(loadCoursesSuccess(courses))
-		}).catch(error => {
-			throw(error)
-		})
-	}
+  return function(dispatch){
+    dispatch(beginAjaxCall())
+    return courseApi.getAllCourses().then(courses => {
+      dispatch(loadCoursesSuccess(courses))
+    }).catch(error => {
+      dispatch(ajaxCallError(error))
+      throw(error)
+    })
+  }
 }

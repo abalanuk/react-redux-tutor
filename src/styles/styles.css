@@ -1,4 +1,5 @@
 /* Styles */
+@import './toastr.min.css';
 
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -6,7 +7,6 @@
   color: #4d4d4d;
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
   font-weight: 300;
   background-color: #fff;
@@ -29,6 +29,8 @@ nav {
 
 .main {
   background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .coursesList {
@@ -45,5 +47,21 @@ nav {
 
 
 h2 {
-	color: #5bb7db;
+  color: #5bb7db;
+}
+
+.blockfont {
+  min-height: 55px;
+}
+.blockfont .line1,
+.blockfont .line2 {
+  height: 7px;
+  display: inline-block;
+  background-color: #f2f2f2;
+}
+.blockfont .line1 {
+  width: 80%;
+}
+.blockfont .line2 {
+  width: 60%;
 }
