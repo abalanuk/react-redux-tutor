@@ -50,6 +50,21 @@ h2 {
   color: #5bb7db;
 }
 
+.error-message {
+  font: 24px fantasy;
+  position: fixed;
+  color: red;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: antiquewhite;
+  opacity: .7;
+}
+
 .blockfont {
   min-height: 55px;
 }
