@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux'
 import courses from './courseReducer'
 import authors from './authorReducer'
-import ajaxStatus from './ajaxStatusReducer'
+import { ajaxInProgress, ajaxErrored } from './ajaxStatusReducer'
 
 const rootReducer = combineReducers({
   courses,
   authors,
-  ajaxStatus
+  ajaxInProgress,
+  ajaxErrored
 });
 
 export default rootReducer

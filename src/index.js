@@ -7,8 +7,6 @@ import { Provider } from 'react-redux'
 import { Router, browserHistory } from 'react-router'
 /* Local import */
 import configureStore from './store/configureStore'
-import {loadCourses} from './actions/courseActions'
-import {loadAuthors} from './actions/authorActions'
 import routes from './routes'
 
 // You can import SASS/CSS files too!
@@ -19,9 +17,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 const store = configureStore()
 
 //debugger
-
-store.dispatch(loadCourses())
-store.dispatch(loadAuthors())
 
 ReactDOM.render(
   <Provider store={store}>
