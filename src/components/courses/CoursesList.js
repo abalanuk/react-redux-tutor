@@ -33,6 +33,11 @@ const TABLE_COLUMNS = [{
     field: 'length',
     sortable: false,
     width: 70
+  },
+  {
+    title: 'Drop',
+    field: 'del',
+    width: 30
   }
 ]
 
@@ -51,7 +56,7 @@ class CoursesList extends React.Component {
 
   renderTableBody(courses) {
     return courses.map(course => {
-      return <CourseListRow key={course.id} course={course}/>
+      return <CourseListRow key={course.id} course={course} onRemove={this.props.onRemove}/>
     })
   }
 
