@@ -14,7 +14,7 @@ import routes from './routes'
 import './styles/styles.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
-const store = configureStore()
+const store = configureStore();
 
 //debugger
 
@@ -23,4 +23,4 @@ ReactDOM.render(
     <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('app')
-)
+);
