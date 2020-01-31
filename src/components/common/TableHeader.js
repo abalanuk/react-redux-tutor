@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const TableHeader = ({columns}) => {
   return (
@@ -10,14 +11,14 @@ const TableHeader = ({columns}) => {
       }
     </tr>
   )
-}
+};
 
-TableHeader.PropTypes = {
+TableHeader.propTypes = {
   columns: PropTypes.array.isRequired
-}
+};
 
-TableHeader.DefaultProps = {
+TableHeader.defaultProps = {
   columns: []
-}
+};
 
 export default TableHeader

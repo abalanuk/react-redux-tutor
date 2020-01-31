@@ -4,22 +4,22 @@ import initialState from './initialState'
 export default function(state = initialState.courses, action) {
   switch(action.type){
     case types.LOAD_COURSES_SUCCESS:
-      return action.courses
+      return action.courses;
     case types.CREATE_COURSE_SUCCESS:
       return [
         ...state,
         action.course
-      ]
+      ];
     case types.UPDATE_COURSE_SUCCESS:
       return [
         ...state.filter(course => course.id !== action.course.id),
         action.course
-      ]
+      ];
     case types.DELETE_COURSE_COMPLETE:
       //alternative when we have an index of item inside array: [...state.slice[0, index], ...state.slice[index+1]]
       return [
         ...state.filter(course => course.id !== action.courseId)
-      ]
+      ];
     default:
       return state
   }

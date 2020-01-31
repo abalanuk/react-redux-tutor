@@ -1,16 +1,15 @@
 import React from 'react'
-import {Link, IndexLink} from 'react-router'
 
 const Header = () => {
   return (
     <nav>
-      <IndexLink to="/courses" activeClassName="active">Courses</IndexLink>
+      <a href="/courses">Courses</a>
       {" | "}
-      <Link to="/welcome" activeClassName="active">Welcome</Link>
+      <a href="/home">Home</a>
       {" | "}
-      <Link to="/about" activeClassName="active">About</Link>
+      <a href="/about">About</a>
     </nav>
-  );
-}
+  )
+};
 
 export default Header

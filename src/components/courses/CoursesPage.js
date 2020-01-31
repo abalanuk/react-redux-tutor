@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { browserHistory } from 'react-router'
+
 import * as courseActions from '../../actions/courseActions'
 import CoursesList from './CoursesList'
 
@@ -9,41 +10,40 @@ const errorMessage = 'Oops...Something went wrong with data loading'
 
 class CoursesPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     //part of state perhaps should be removed
     this.state = {
       hasDataLoadingError: false,
       loadError: ''
-    }
+    };
 
-    this.redirectToCreateForm = this.redirectToCreateForm.bind(this)
-    this.handleRemoveItem = this.handleRemoveItem.bind(this)
+    this.redirectToCreateForm = this.redirectToCreateForm.bind(this);
+    this.handleRemoveItem = this.handleRemoveItem.bind(this);
   }
 
   componentDidMount() {
     this.props.courseActions.loadCourses()
       .catch(error => {
-        this.setState({hasDataLoadingError: true})
+        this.setState({hasDataLoadingError: true});
         throw(error)
       })
   }
 
-  //using browserHistory component of router we can initiate changing of route
   redirectToCreateForm() {
-    browserHistory.push('/create-course')
+    this.props.history.push('/create-course');
   }
 
   handleRemoveItem(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const course_id = event.target.pathname.slice(1)
+    const course_id = event.target.pathname.slice(1);
     //console.log(course_id)
     this.props.courseActions.deleteCourse(course_id)
   }
 
   render() {
-    const {courses, isLoading} = this.props
+    const {courses, isLoading} = this.props;
 
     return (
       <div className="coursesList">
@@ -51,7 +51,7 @@ class CoursesPage extends React.Component {
 
         {/*button for transition to ManageCoursesPage*/}
         <input
-          className="btn btn-primary"
+          className="btn btn-primary add-course"
           type="submit"
           value='Add Course'
           onClick={this.redirectToCreateForm}
@@ -65,16 +65,16 @@ class CoursesPage extends React.Component {
 
 CoursesPage.defaultProps = {
   courses: []
-}
+};
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   isLoading: PropTypes.bool
-}
+};
 
 
 //state -> represents state inside our store
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state){
   return {
     //key courses -> will be call inside our component: this.props.courses
     courses: state.courses, //state.courses it's what we define as key inside rootReducer

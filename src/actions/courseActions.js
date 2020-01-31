@@ -20,7 +20,7 @@ export function saveCourse(course) {
       course.id ? dispatch(updateCourseSuccess(savedCourse)) : dispatch(createCourseSuccess(savedCourse))
     }).catch(error => {
       //emitting this action for reducing by 1 ajaxCallsInProgress slice of state via ajaxStatusReducer
-      dispatch(ajaxCallError())
+      dispatch(ajaxCallError());
       throw(error)
     })
   }
@@ -43,11 +43,11 @@ export function loadCoursesSuccess(courses) {
 
 export function loadCourses() {
   return function(dispatch){
-    dispatch(beginAjaxCall())
+    dispatch(beginAjaxCall());
     return courseApi.getAllCourses().then(courses => {
       dispatch(loadCoursesSuccess(courses))
     }).catch(error => {
-      dispatch(ajaxCallError())
+      dispatch(ajaxCallError());
       throw(error)
     })
   }

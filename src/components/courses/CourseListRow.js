@@ -1,21 +1,21 @@
-import React, { PropTypes } from 'react'
-import {Link} from 'react-router'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const CourseListRow = ({course, onRemove}) => {
   return (
     <tr>
-      <td><Link to={course.watchHref} target='_blank'>Watch</Link></td>
-      <td><Link to={'/course/' + course.id}>{course.title}</Link></td>
+      <td><a href={course.watchHref} target="_blank">Watch</a></td>
+      <td><a href={'/courses/' + course.id}>{course.title}</a></td>
       <td>{course.authorId}</td>
       <td>{course.category}</td>
       <td>{course.length}</td>
-      <td><Link to={course.id} onClick={onRemove}>Delete</Link></td>
+      <td><a href={course.id} onClick={onRemove}>Delete</a></td>
     </tr>
   )
-}
+};
 
 CourseListRow.propTypes = {
   course: PropTypes.object.isRequired
-}
+};
 
 export default CourseListRow

@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import CourseListRow from './CourseListRow'
 import TableHeader from '../common/TableHeader'
 import LoadingTableBody from '../common/LoadingTableBody'
 
-const LOADING_ROWS_COUNT = 10
+const LOADING_ROWS_COUNT = 10;
 const TABLE_COLUMNS = [{
     title: 'Watch',
     field: 'watch-link',
@@ -39,15 +40,11 @@ const TABLE_COLUMNS = [{
     field: 'del',
     width: 30
   }
-]
+];
 
 class CoursesList extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   renderLoadingTableBody() {
-    let rowArray = []
+    let rowArray = [];
     for (let i = 0; i < LOADING_ROWS_COUNT; i++) {
       rowArray.push(<LoadingTableBody key={'loading' + i}/>)
     }
@@ -61,8 +58,8 @@ class CoursesList extends React.Component {
   }
 
   render() {
-    const {courses, isLoading} = this.props
-    debugger
+    const {courses, isLoading} = this.props;
+    //debugger
     return (
       <table className="table">
         <thead>
@@ -78,13 +75,14 @@ class CoursesList extends React.Component {
 
 CoursesList.defaultProps = {
   courses: [],
-  isLoading: true
-}
+  isLoading: true,
+  onRemove: () => {}
+};
 
 CoursesList.propTypes = {
   courses: PropTypes.array.isRequired,
   isLoading: PropTypes.bool
-}
+};
 
 export default CoursesList
 
